@@ -1,34 +1,54 @@
 package calculator;
 
-public class postfixCalculator implements IPostfixCalculator {
-	public N validateValue(N val) {
-		try {
-			
-			Integer.valueOf((String)val);
-			push(val);
-		}
-		catch (Exception e) {
-			if (val=="*"|| val=="+"||val=="-"||val=="/") {
-				operationVerification();
-				
-			}
-			else {
-				System.out.print("El caractér ingresado no es válido para una operación");
-				return val;
-			}
-		}
-		return val;
+public class postfixCalculator<N> implements IPostfixCalc<N> {
+	
+	int result;
+	@Override
+	public int addition(N value1, N value2) {
+		// TODO Auto-generated method stub
+		int val1=(Integer) value1;
+		int val2=(Integer) value2;
+		return sendResult(val2+val1);
 			
 	}
-	public void operationVerification() {
-		if(getCounterNumber()==1||getCounterNumber()==0) {
-			System.out.print("Es inválida la operación postfix dado que no hay suficientes números para realizar dicha operación");
+
+	@Override
+	public int substract(N value1, N value2) {
+		// TODO Auto-generated method stub
+		int val1=(Integer) value1;
+		int val2=(Integer) value2;
+		return sendResult(val2-val1);
+		
+		
+	}
+
+	@Override
+	public int divide(N value1, N value2) {
+		// TODO Auto-generated method stub
+		int val1=(Integer) value1;
+		int val2=(Integer) value2;
+		if (val1==0) {
+			System.out.print("Es infinito el resultado, operación indefinida");
+			return 0;
 		}
 		else {
-			getHead().getValue();
-			pop();
-			getHead().getValue();
-			pop();
+			return sendResult(val2/val1);	
 		}
+		
 	}
+
+	@Override
+	public int multiplication(N value1, N value2) {
+		int val1=(Integer) value1;
+		int val2=(Integer) value2;
+		return sendResult(val2*val1);
+	}
+
+	@Override
+	public int sendResult(int value) {
+		// TODO Auto-generated method stub
+		return value;
+	}
+
+	
 }

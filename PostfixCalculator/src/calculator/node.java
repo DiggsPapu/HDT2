@@ -13,7 +13,7 @@ public class node<N> {
 	 * Es el constructor cuando no hay valores
 	 */
 	public node(N valor){
-		valor= value;
+		int valor1= (Integer)value;
 		next=null;
 	}
 	/**

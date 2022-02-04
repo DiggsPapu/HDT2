@@ -28,7 +28,38 @@ public class StackVector<N> implements IStack<N> {
 	public void setCounterNumber(int counterNumber) {
 		this.counterNumber = counterNumber;
 	}
+
 	
+	public void operationVerification(N value) {
+		// TODO Auto-generated method stub
+		if(getCounterNumber()==1||getCounterNumber()==0) {
+			System.out.print("Es inválida la operación postfix dado que no hay suficientes números para realizar dicha operación");
+		}
+		else {
+			N value1=getHead().getValue();
+			pop();
+			N value2=getHead().getValue();
+			pop();
+			if (value=="+") {
+				postfixCalculator<N> operation = new postfixCalculator<N>();
+				operation.addition(value1, value2);
+			}
+			else if (value=="-") {
+				postfixCalculator<N> operation = new postfixCalculator<N>();
+				operation.substract(value1, value2);
+			}
+			else if (value=="*") {
+				postfixCalculator<N> operation = new postfixCalculator<N>();
+				operation.substract(value1, value2);
+			}
+			else {
+				postfixCalculator<N> operation = new postfixCalculator<N>();
+				operation.divide(value1, value2);
+			}
+		}
+	}
+	
+
 	
 	public N validateValue(N val) {
 		try {
@@ -38,8 +69,7 @@ public class StackVector<N> implements IStack<N> {
 		}
 		catch (Exception e) {
 			if (val=="*"|| val=="+"||val=="-"||val=="/") {
-				operationVerification();
-				
+				operationVerification(val);
 			}
 			else {
 				System.out.print("El caractér ingresado no es válido para una operación");
@@ -49,17 +79,8 @@ public class StackVector<N> implements IStack<N> {
 		return val;
 			
 	}
-	public void operationVerification() {
-		if(getCounterNumber()==1||getCounterNumber()==0) {
-			System.out.print("Es inválida la operación postfix dado que no hay suficientes números para realizar dicha operación");
-		}
-		else {
-			getHead().getValue();
-			pop();
-			getHead().getValue();
-			pop();
-		}
-	}
+	
+
 	/***
 	 * Al inicio pensé en crear dos clases constructoras de nodos, 
 	 * la primera para cuando esté null y otra para cuando haya al menos 1 valor.
